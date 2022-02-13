@@ -1,0 +1,73 @@
+$buttonColor: #f7b500;
+
+.Login {
+    background-color: #fbf8e9;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+    .card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .hr {
+        height: 1px;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0;
+    }
+    .label {
+        margin-top: 16px;
+
+    }
+    input {
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+        &:focus {
+            outline: 1px solid rgba($color: #000000, $alpha: 0.2);
+            border-radius: 4px;
+        }
+    }
+    .btn-orange {
+        background-color: $buttonColor;
+        padding: 12px 36px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        transition: background-color 0.2s ease-out;
+        &:hover {
+            background-color: lighten($color: $buttonColor, $amount: 10);
+        }
+        &:active {
+            background-color: lighten($color: $buttonColor, $amount: 20);
+        }
+    }
+    .btn-github {
+        background-color: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 8px;
+        border-radius: 8px;
+        text-decoration: none;
+        &:hover {
+            background-color: lighten($color: black, $amount: 10);
+        }
+        &:active {
+            background-color: lighten($color: black, $amount: 20);
+        }
+    }
+}

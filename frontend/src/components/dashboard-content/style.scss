@@ -1,0 +1,20 @@
+$borderRadius: 8px;
+.DashboardContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    .title {
+        background-color: #fce094;
+        padding: 24px 36px;
+        border-top-left-radius: $borderRadius;
+        border-top-right-radius: $borderRadius;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    .content {
+        flex: 1;
+        border-bottom-left-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
+    }
+}
