@@ -1,9 +1,12 @@
+const fs = require('fs-extra');
+const path = require('path');
 const express = require('express');
 const { noteRouter } = require('./note');
 const axios = require('axios').default;
 
 const app = express();
 app.use(express.json())
+app.use(express.static(path.join(__dirname, '..', 'public')))
 app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -40,7 +43,7 @@ app.get('/connect/github/callback', async (req, res, next) => {
     }
 });
 // GITHUB TOKEN CHECKER
-app.use(async (req, res, next) => {
+const authChecker = async (req, res, next) => {
     try {
         if (typeof req.headers.authorization !== 'string') {
             throw new Error('Not Authenticated, Authorization header is needed');
@@ -63,15 +66,29 @@ app.use(async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-});
-app.get('/api/me', async (req, res, next) => {
+};
+app.get('/api/me', authChecker, async (req, res, next) => {
     try {
         res.json(res.locals.user)
     } catch (error) {
         next(error);
     }
 })
-app.use('/api/note', noteRouter)
+app.use('/api/note', authChecker, noteRouter);
+
+app.get('*', async (req, res, next) => {
+    try {
+        const indexHtmlPath = path.join(__dirname, '..', 'public', 'index.html');
+        const fileExists = await fs.pathExists(indexHtmlPath);
+        if (fileExists) {
+            res.sendFile(indexHtmlPath)
+            return;
+        }
+        throw new Error(`index.html not found at: ${indexHtmlPath}`)
+    } catch (error) {
+        next(error);
+    }
+})
 app.use((err, req, res, next) => {
     const { message, stack } = err;
     res.status(500).json({
