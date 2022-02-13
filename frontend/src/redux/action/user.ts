@@ -8,6 +8,9 @@ export const setUser = () => async (dispatch: AppDispatch) => {
         await new Promise((res) => setTimeout(res, 300));
         dispatch({ type: 'SET_USER', payload: user });
     } catch (error) {
+        // Here was a bug, if token expires I cannot make ProtectedPage reload here :(
+        RequestService.logout();
+        window.location.reload();
         dispatch({ type: 'SET_USER', payload: null });
 
     }

@@ -8,7 +8,7 @@ export const DashboardContent: React.FC<Props> = ({ title, children }) => {
     return (
         <div className='DashboardContent'>
             <div className="title">{title}</div>
-            <div className="content">{children}</div>
+            <div className="body">{children}</div>
         </div>
     )
 }

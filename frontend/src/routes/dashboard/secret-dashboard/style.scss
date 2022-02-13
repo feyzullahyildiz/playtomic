@@ -1,0 +1,16 @@
+.SecretDashboard {
+    .list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 16px 0;
+        .list-item {
+            display: flex;
+            align-items: center;
+
+            .delete-icon {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -35,3 +35,8 @@ interface GithubUser {
     created_at: Date;
     updated_at: Date;
 }
+
+interface Note {
+    id: number;
+    text: string;
+}

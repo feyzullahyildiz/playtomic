@@ -12,7 +12,8 @@ $borderRadius: 8px;
         font-weight: 600;
         font-size: 1.1rem;
     }
-    .content {
+    .body {
+        padding: 24px 36px;
         flex: 1;
         border-bottom-left-radius: $borderRadius;
         border-bottom-right-radius: $borderRadius;

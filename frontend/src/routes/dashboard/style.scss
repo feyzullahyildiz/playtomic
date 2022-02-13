@@ -22,7 +22,7 @@
                 color: inherit;
             }
             &.active {
-                background-color: #fce094 ;
+                background-color: lighten($color: #fce094, $amount: 10) ;
             }
         }
     }

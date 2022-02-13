@@ -1,12 +1,13 @@
 const express = require('express');
+const { noteRouter } = require('./note');
 const axios = require('axios').default;
 
 const app = express();
-
+app.use(express.json())
 app.use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.set('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS');
     if (req.method === 'OPTIONS') {
         res.json({});
         return;
@@ -70,7 +71,7 @@ app.get('/api/me', async (req, res, next) => {
         next(error);
     }
 })
-
+app.use('/api/note', noteRouter)
 app.use((err, req, res, next) => {
     const { message, stack } = err;
     res.status(500).json({

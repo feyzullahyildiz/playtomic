@@ -8,6 +8,8 @@ import {
 import { DashboardContent } from './components/dashboard-content';
 
 import { Dashboard } from './routes/dashboard';
+import { SecretDashboard } from './routes/dashboard/secret-dashboard';
+import { Settings } from './routes/dashboard/settings';
 import { Login } from './routes/login';
 import { Logout } from './routes/logout';
 
@@ -19,10 +21,14 @@ function App() {
         <Routes>
           <Route path='/' element={<ProtectedPage><Dashboard /></ProtectedPage>}>
             <Route path='settings' element={
-              <DashboardContent title='Settings'></DashboardContent>
+              <DashboardContent title='Settings'>
+                <Settings />
+              </DashboardContent>
             } />
             <Route path='dashboard' element={
-              <DashboardContent title='Secret Dashboard'></DashboardContent>
+              <DashboardContent title='Secret Dashboard'>
+                <SecretDashboard />
+              </DashboardContent>
             } />
           </Route>
           <Route path='/login' element={<Login />} />

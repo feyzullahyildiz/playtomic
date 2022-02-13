@@ -16,10 +16,32 @@ const me = async () => {
     const res = await axios.get<GithubUser>(meUrl, { headers: { Authorization: `token ${token}` } })
     return res.data;
 }
+const addNote = async (text: string) => {
+    const url = `${API_URL}/api/note`;
+    const token = getToken();
+    const res = await axios.post<Note>(url, { text }, { headers: { Authorization: `token ${token}` } })
+    return res.data;
+}
+const deleteNote = async (id: number) => {
+    const url = `${API_URL}/api/note/${id}`;
+    const token = getToken();
+    const res = await axios.delete<Note>(url, { headers: { Authorization: `token ${token}` } })
+    return res.data;
+}
+const loadNotes = async () => {
+    const url = `${API_URL}/api/note`;
+    const token = getToken();
+    const res = await axios.get<Note[]>(url, { headers: { Authorization: `token ${token}` } })
+    return res.data;
+}
 
 export const RequestService = {
     setToken,
     getToken,
     me,
     logout,
+
+    addNote,
+    loadNotes,
+    deleteNote,
 }
