@@ -5,6 +5,13 @@ let index = 0;
 const getId = () => index++;
 const dataList = [];
 
+const clearCache = () => {
+    dataList.length = 0;
+    console.log('cache cleared', new Date())
+}
+clearCache();
+setInterval(clearCache, 1000 * 60 * 60 * 6);
+
 router.get('/', (req, res, next) => {
     try {
         const userId = res.locals.user.id;
@@ -19,6 +26,10 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     try {
         const userId = res.locals.user.id;
+        const count = dataList.filter(item => item.userId === userId).length;
+        if(count > 200) {
+            throw new Error('You are not allowed to add over 200 data in a time')
+        }
         const text = (req.body.text + '' || '?').substring(0, 50);
         const id = getId();
         const item = { id, text, userId };
